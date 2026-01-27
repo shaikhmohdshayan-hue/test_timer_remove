@@ -518,3 +518,5 @@ setTimeout(() => {
     socket.send('{"type":"LOGOUT"}');
 }, 1000)
 }
+window.create_hs = create_hs;
+console.log('create_hs exposed to window');
