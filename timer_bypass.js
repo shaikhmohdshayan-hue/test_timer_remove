@@ -7,7 +7,6 @@ var proctorReq = document.getElementById('proctorReq');
     
     if(authType==='Anugyna')
     {
-        socket = new WebSocket('ws://localhost:8000/');
         smartLogout.style.display = "block";
     }
     if(authType==="faceAuthReq")
