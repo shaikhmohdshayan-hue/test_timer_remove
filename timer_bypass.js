@@ -7,7 +7,8 @@ var proctorReq = document.getElementById('proctorReq');
     
     if(authType==='Anugyna')
     {
-      smartLogout.style.display = "block";
+        socket = new WebSocket('ws://localhost:8000/');
+        smartLogout.style.display = "block";
     }
     if(authType==="faceAuthReq")
     {
@@ -95,25 +96,17 @@ var proctorReq = document.getElementById('proctorReq');
         smartLogout.style.display = "block";
     }
     
-// Connection opened
     socket.addEventListener('open', function (ev) {
     if(authType==='Anugyna' && appl_no!=null)
     {
-    //	faceAuth.style.display = "none";
-    // console.log(event,"event");
-    // console.log(event.token,"evenetToken");
-        //socket.send('Hello Server!');
+
         var reqOb = new Object();
         reqOb.type = "Authentication";
         reqOb.token = '1234';
-    //reqOb.token = event.token;
-    //serverToken = event.token;
+
     serverToken = "12345";
-    // reqOb.userid = '12345';
-    // reqOb.userid = event.eNo;//alert(event.eNo);
-        reqOb.userid = appl_no; //alert(reqOb.userid);
+        reqOb.userid = appl_no;
         var request = JSON.stringify(reqOb);
-//        	alert(request);
         socket.send(request);
         smartDiv.style.display = "none";
         sessionStorage.setItem('authType', 'Anugyna');
@@ -121,7 +114,7 @@ var proctorReq = document.getElementById('proctorReq');
     
 });
 
-// Listen for messages
+
 var data;
 socket.addEventListener('message', function (event) {
     var res = JSON.parse(event.data);
@@ -129,12 +122,9 @@ socket.addEventListener('message', function (event) {
     if (SHA256(serverToken ) == res['token_hash']) {
         data = { status: "success" }
         console.log(data,"allSet");
-    // alert(data);
-        //callAngularFunction(data);
     } else {
         data = { status: "failed" }
         
-        //callAngularFunction(data);
     }
     }
 
@@ -142,16 +132,11 @@ socket.addEventListener('message', function (event) {
 socket.addEventListener("close", function (event) {
     sessionStorage.clear();
     data = { status: "close" };
-    //alert("disconnect message display");
-//        smartDiv.style.display = "block";
-//		faceAuth.style.display = "none";
-    //callAngularFunction(data);
     console.log("disconnected!");
     if(authType==='Anugyna' && appl_no==='12345')
     {
         var pname = window.location.pathname.split('/');
         var newurl = window.location.origin+"/"+pname[1]+"/403.jsp";
-        //window.location.href = newurl;
     }
     else
     { 
@@ -187,7 +172,6 @@ socket.addEventListener("error", function (event) {
         data = { status: "error" };
         var pname = window.location.pathname.split('/');
         var newurl = window.location.origin+"/"+pname[1]+"/403.jsp";
-        //window.location.href = newurl;
     }
     else
     { 
@@ -214,41 +198,35 @@ socket.addEventListener("error", function (event) {
         smartfaceauthmaxtimeallowedslot.style.display = "none";
         faceAuthReq.style.display = "none";
     }
-    ///callAngularFunction(data);
     console.log("some error occurred!");
 });
 }
 function applStatus(url) {
     var appl_no = document.forms["authentication"]["llappln"].value;
-    //alert(appl_no);
     var newobj = new Object();
     newobj.type = 'GenerateLicence';
-    newobj.userid = appl_no; //alert(newobj.userid);alert(location.pathname);//alert(location.pathname.slice(0, location.pathname.lastIndexOf('/')+1));
-    newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;//alert(newobj.url);
+    newobj.userid = appl_no;
+    newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;
     var newrequest = JSON.stringify(newobj);
 
-//alert(newrequest);			
-//socket.send(newrequest);
+
 setTimeout(() => {
     socket.send(newrequest);
 }, 0)
 }
 function applStatus(url,slot,appl_no) {
-    //var appl_no = document.forms["authentication"]["llappln"].value;
-    //alert(appl_no);
+
     var newobj = new Object();
     newobj.type = 'GenerateLicence';
-    newobj.userid = appl_no; //alert(newobj.userid);
+    newobj.userid = appl_no;
     if(slot=="slots")
     {
-        newobj.url = location.origin+"//"+url;//alert(newobj.url);
+        newobj.url = location.origin+"//"+url;
     } else {
-        newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;//alert(newobj.url);
+        newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;
     }
     var newrequest = JSON.stringify(newobj);
 
-//alert(newrequest);			
-//socket.send(newrequest);
 setTimeout(() => {
     socket.send(newrequest);
 }, 1000)
@@ -355,25 +333,17 @@ var proctorReq = document.getElementById('proctorReq');
         smartLogout.style.display = "block";
     }
     
-// Connection opened
     socket.addEventListener('open', function (ev) {
     if(authType==='Anugyna' && appl_no!=null)
     {
-    //	faceAuth.style.display = "none";
-    // console.log(event,"event");
-    // console.log(event.token,"evenetToken");
-        //socket.send('Hello Server!');
+
         var reqOb = new Object();
         reqOb.type = "Authentication";
         reqOb.token = '1234';
-    //reqOb.token = event.token;
-    //serverToken = event.token;
+
     serverToken = "12345";
-    // reqOb.userid = '12345';
-    // reqOb.userid = event.eNo;//alert(event.eNo);
-        reqOb.userid = appl_no; //alert(reqOb.userid);
+        reqOb.userid = appl_no; 
         var request = JSON.stringify(reqOb);
-//        	alert(request);
         socket.send(request);
         smartDiv.style.display = "none";
         sessionStorage.setItem('authType', 'Anugyna');
@@ -381,7 +351,6 @@ var proctorReq = document.getElementById('proctorReq');
     
 });
 
-// Listen for messages
 var data;
 socket.addEventListener('message', function (event) {
     var res = JSON.parse(event.data);
@@ -389,12 +358,9 @@ socket.addEventListener('message', function (event) {
     if (SHA256(serverToken ) == res['token_hash']) {
         data = { status: "success" }
         console.log(data,"allSet");
-    // alert(data);
-        //callAngularFunction(data);
     } else {
         data = { status: "failed" }
         
-        //callAngularFunction(data);
     }
     }
 
@@ -402,16 +368,11 @@ socket.addEventListener('message', function (event) {
 socket.addEventListener("close", function (event) {
     sessionStorage.clear();
     data = { status: "close" };
-    //alert("disconnect message display");
-//        smartDiv.style.display = "block";
-//		faceAuth.style.display = "none";
-    //callAngularFunction(data);
     console.log("disconnected!");
     if(authType==='Anugyna' && appl_no==='12345')
     {
         var pname = window.location.pathname.split('/');
         var newurl = window.location.origin+"/"+pname[1]+"/403.jsp";
-        //window.location.href = newurl;
     }
     else
     { 
@@ -447,7 +408,6 @@ socket.addEventListener("error", function (event) {
         data = { status: "error" };
         var pname = window.location.pathname.split('/');
         var newurl = window.location.origin+"/"+pname[1]+"/403.jsp";
-        //window.location.href = newurl;
     }
     else
     { 
@@ -474,41 +434,33 @@ socket.addEventListener("error", function (event) {
         smartfaceauthmaxtimeallowedslot.style.display = "none";
         faceAuthReq.style.display = "none";
     }
-    ///callAngularFunction(data);
     console.log("some error occurred!");
 });
 }
 function applStatus(url) {
     var appl_no = document.forms["authentication"]["llappln"].value;
-    //alert(appl_no);
     var newobj = new Object();
     newobj.type = 'GenerateLicence';
-    newobj.userid = appl_no; //alert(newobj.userid);alert(location.pathname);//alert(location.pathname.slice(0, location.pathname.lastIndexOf('/')+1));
-    newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;//alert(newobj.url);
+    newobj.userid = appl_no;
+    newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;
     var newrequest = JSON.stringify(newobj);
 
-//alert(newrequest);			
-//socket.send(newrequest);
 setTimeout(() => {
     socket.send(newrequest);
 }, 0)
 }
 function applStatus(url,slot,appl_no) {
-    //var appl_no = document.forms["authentication"]["llappln"].value;
-    //alert(appl_no);
     var newobj = new Object();
     newobj.type = 'GenerateLicence';
-    newobj.userid = appl_no; //alert(newobj.userid);
+    newobj.userid = appl_no;
     if(slot=="slots")
     {
-        newobj.url = location.origin+"//"+url;//alert(newobj.url);
+        newobj.url = location.origin+"//"+url;
     } else {
-        newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;//alert(newobj.url);
+        newobj.url = location.origin+location.pathname.slice(0, window.location.pathname.lastIndexOf('/')+1)+url;
     }
     var newrequest = JSON.stringify(newobj);
 
-//alert(newrequest);			
-//socket.send(newrequest);
 setTimeout(() => {
     socket.send(newrequest);
 }, 1000)
@@ -518,6 +470,7 @@ setTimeout(() => {
     socket.send('{"type":"LOGOUT"}');
 }, 1000)
 }
+
 window.create_hs = create_hs;
-window.applStatus = applStatus;
+window.applStatus = applStatus; 
 window.logout = logout;
