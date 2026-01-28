@@ -519,4 +519,5 @@ setTimeout(() => {
 }, 1000)
 }
 window.create_hs = create_hs;
-console.log('create_hs exposed to window');
+window.applStatus = applStatus;
+window.logout = logout;
