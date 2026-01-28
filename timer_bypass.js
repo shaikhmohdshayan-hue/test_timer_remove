@@ -8,12 +8,12 @@ var proctorReq = document.getElementById('proctorReq');
     if(authType==='Anugyna')
     {
         socket = new WebSocket('ws://localhost:8000/');
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
     }
     if(authType==="faceAuthReq")
     {
         faceAuthReq.style.display = "block";
-        smartLogout.style.display = "none";
+        // smartLogout.style.display = "none";
     }
     else if(authType!='Anugyna')
     {
@@ -93,7 +93,7 @@ var proctorReq = document.getElementById('proctorReq');
         faceauthmaxtimeallowedslot.style.display = "none";
         faceAuthReq.style.display = "none";
         proctorReq.style.display = "none";	
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
     }
     
     socket.addEventListener('open', function (ev) {
@@ -143,7 +143,7 @@ socket.addEventListener("close", function (event) {
         smartDiv.style.display = "block";
         faceAuth.style.display = "none";
         proctorReq.style.display = "none";
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
         NoFaceAuthReq.style.display = "none";
         maxLogins.style.display = "none";
         capturePhoto.style.display = "none";
@@ -178,7 +178,7 @@ socket.addEventListener("error", function (event) {
         smartDiv.style.display = "block";
         faceAuth.style.display = "none";
         proctorReq.style.display = "none";
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
         NoFaceAuthReq.style.display = "none";
         maxLogins.style.display = "none";
         capturePhoto.style.display = "none";
@@ -245,12 +245,12 @@ var proctorReq = document.getElementById('proctorReq');
     if(authType==='Anugyna')
     {
         socket = new WebSocket('ws://localhost:8000/');
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
     }
     if(authType==="faceAuthReq")
     {
         faceAuthReq.style.display = "block";
-        smartLogout.style.display = "none";
+        // smartLogout.style.display = "none";
     }
     else if(authType!='Anugyna')
     {
@@ -330,7 +330,7 @@ var proctorReq = document.getElementById('proctorReq');
         faceauthmaxtimeallowedslot.style.display = "none";
         faceAuthReq.style.display = "none";
         proctorReq.style.display = "none";	
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
     }
     
     socket.addEventListener('open', function (ev) {
@@ -379,7 +379,7 @@ socket.addEventListener("close", function (event) {
         smartDiv.style.display = "block";
         faceAuth.style.display = "none";
         proctorReq.style.display = "none";
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
         NoFaceAuthReq.style.display = "none";
         maxLogins.style.display = "none";
         capturePhoto.style.display = "none";
@@ -414,7 +414,7 @@ socket.addEventListener("error", function (event) {
         smartDiv.style.display = "block";
         faceAuth.style.display = "none";
         proctorReq.style.display = "none";
-        smartLogout.style.display = "block";
+        // smartLogout.style.display = "block";
         NoFaceAuthReq.style.display = "none";
         maxLogins.style.display = "none";
         capturePhoto.style.display = "none";
